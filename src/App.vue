@@ -6,29 +6,61 @@
       width="100%"
       viewBox="0 0 100 100"
     >
-      <clipPath id="circle">
-        <circle cx="0" cy="0" r="50" />
-      </clipPath>
-
       <g id="hours" transform="translate(50 50)">
         <circle
           cx="0"
           cy="0"
-          r="50"
-          stroke="black"
-          stroke-width="4"
-          fill="red"
-          clip-path="url(#circle)"
+          r="49"
+          stroke-width="1"
+          class="fill-blue-400 stroke-yellow-200"
         />
         <text
-          font-family="Neuropol"
-          :x="sin(i, hours.length)"
-          :y="cos(i, hours.length)"
-          fill="yellow"
+          v-for="(digit, i) in hours"
+          class="fill-yellow-200"
+          :transform="transform(i, hours.length, 45, 18)"
           text-anchor="middle"
           alignment-baseline="middle"
-          font-size="9"
-          v-for="(digit, i) in hours"
+          :font-size="size"
+        >
+          {{ digit }}
+        </text>
+      </g>
+
+      <g id="minutes" transform="translate(50 50)">
+        <circle
+          cx="0"
+          cy="0"
+          r="41"
+          stroke-width="1"
+          class="fill-blue-400 stroke-yellow-200"
+        />
+        <text
+          v-for="(digit, i) in minutes"
+          class="fill-yellow-200"
+          :transform="transform(i, minutes.length, 37, 45)"
+          text-anchor="middle"
+          alignment-baseline="middle"
+          :font-size="size"
+        >
+          {{ digit }}
+        </text>
+      </g>
+
+      <g id="seconds" transform="translate(50 50)">
+        <circle
+          cx="0"
+          cy="0"
+          r="33"
+          stroke-width="1"
+          class="fill-blue-400 stroke-yellow-200"
+        />
+        <text
+          v-for="(digit, i) in minutes"
+          class="fill-yellow-200"
+          :transform="transform(i, minutes.length, 29, 45)"
+          text-anchor="middle"
+          alignment-baseline="middle"
+          :font-size="size"
         >
           {{ digit }}
         </text>
@@ -45,42 +77,41 @@ export default {
       hours: [],
       minutes: [],
       seconds: [],
+      size: 3.0,
     };
   },
   mounted() {
     this.hours = Array.from({ length: 24 }, (_, i) => ('0' + i).slice(-2));
-    this.minutes = Array.from({ length: 60 }, (_, i) => i + 1);
-    this.seconds = Array.from({ length: 60 }, (_, i) => i + 1);
+    this.minutes = Array.from({ length: 60 }, (_, i) => ('0' + i).slice(-2));
+    this.seconds = Array.from({ length: 60 }, (_, i) => ('0' + i).slice(-2));
     console.log(this.minutes);
   },
   methods: {
-    sin(i, total) {
-      const r = 45;
+    transform(i, total, r, offset) {
       const tick = (2 * Math.PI) / total;
-      return Math.sin(i * tick + 18 * tick) * r;
-    },
-    cos(i, total) {
-      const r = 45;
-      const tick = (2 * Math.PI) / total;
-      return -Math.cos(i * tick + 18 * tick) * r;
+      const x = Math.sin(i * tick + offset * tick) * r;
+      const y = -Math.cos(i * tick + offset * tick) * r;
+
+      const rotation = (i * 360) / total;
+      return `translate(${x} ${y}) rotate(${rotation})`;
     },
   },
 };
 </script>
 
 <style>
-@font-face {
+/* @font-face {
   font-family: 'Neuropol';
-  src: local('Neuropol'), url('./fonts/Neuropol.ttf.woff') format('woff'),
+   src: url('./fonts/NEUROPOL.ttf') format('truetype'); 
+  src: url('./fonts/Neuropol.ttf.eot'),
+    url('./fonts/Neuropol.ttf.woff') format('woff'),
     url('./fonts/Neuropol.ttf.svg#Neuropol') format('svg'),
-    url('./fonts/Neuropol.ttf.eot'),
     url('./fonts/Neuropol.ttf.eot?#iefix') format('embedded-opentype');
   font-weight: normal;
   font-style: normal;
-}
-/* @font-face {
-  font-family: "Merienda";
-  src: local("Merienda"),
-   url(./fonts/Merienda/Merienda-Regular.ttf) format("truetype");
 } */
+
+* {
+  font-family: 'Prompt';
+}
 </style>
