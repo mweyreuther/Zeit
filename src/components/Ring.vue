@@ -63,13 +63,15 @@ export default {
       return `translate(${x} ${y}) rotate(${rotation})`;
     },
     animate(now, before) {
-      const tick = 360 / this.digits;
-      now *= tick;
-      before *= tick;
+      const tick = !this.digits ? 0 : 360 / this.digits;
+      now = 360 - now * tick;
+      before = before === undefined ? 0 : 360 - before * tick;
+      console.log('now', now, 'before', before);
       anime({
         targets: this?.$refs?.group,
-        rotate: [-before, -now],
+        rotate: [before, now === 360 ? 0 : now],
         easing: 'linear',
+        duration: 800,
       });
     },
   },

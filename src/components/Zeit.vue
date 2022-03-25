@@ -6,8 +6,8 @@
     viewBox="0 0 100 100"
     style="transform: translate(3%, -37%)"
   >
-    <Ring :digits="24" :radius="radii[0]" :active="h" />
-    <Ring :digits="60" :radius="radii[1]" :active="m" />
+    <Ring :digits="24" :radius="radii[0]" :active="h" v-if="true" />
+    <Ring :digits="60" :radius="radii[1]" :active="m" v-if="true" />
     <Ring :digits="60" :radius="radii[2]" :active="s" />
     <Ring :digits="0" :radius="radii[3]" :active="0" />
   </svg>
