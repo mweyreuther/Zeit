@@ -1,6 +1,7 @@
 <template>
-  <div id="app" class="bg-gray-500 h-screen">
-    <svg
+  <div id="app" class="bg-gray-500 h-screen p-10">
+    <div class="iphone-x bg-green-200">Hello World</div>
+    <!-- <svg
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       width="100%"
@@ -65,7 +66,7 @@
           {{ digit }}
         </text>
       </g>
-    </svg>
+    </svg> -->
   </div>
 </template>
 
@@ -102,7 +103,7 @@ export default {
 <style>
 /* @font-face {
   font-family: 'Neuropol';
-   src: url('./fonts/NEUROPOL.ttf') format('truetype'); 
+   src: url('./fonts/NEUROPOL.ttf') format('truetype');
   src: url('./fonts/Neuropol.ttf.eot'),
     url('./fonts/Neuropol.ttf.woff') format('woff'),
     url('./fonts/Neuropol.ttf.svg#Neuropol') format('svg'),
@@ -113,5 +114,38 @@ export default {
 
 * {
   font-family: 'Prompt';
+}
+
+.iphone-x {
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  width: 360px;
+  height: 780px;
+  border-radius: 40px;
+  box-shadow: 0px 0px 0px 11px #f4f6fc, 0px 0px 0px 13px #f4f6fc,
+    0px 0px 0px 20px #f4f6fc;
+}
+
+.iphone-x::before,
+.iphone-x::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.iphone-x:before {
+  top: 0px;
+  width: 56%;
+  height: 30px;
+  background-color: #f4f6fc;
+  border-radius: 0px 0px 40px 40px;
+}
+.iphone-x:after {
+  bottom: 7px;
+  width: 140px;
+  height: 4px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
 }
 </style>
