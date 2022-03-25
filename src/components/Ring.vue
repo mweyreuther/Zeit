@@ -1,25 +1,29 @@
 <template>
-  <g :transform="groupTransform">
-    <circle
-      clip-path="circle()"
-      :r="radius"
-      :stroke-width="stroke * 2"
-      class="fill-transparent stroke-yellow-200"
-    />
-    <text
-      v-for="(digit, i) in digits"
-      class="fill-yellow-200"
-      :transform="textTransform(i, digits, radius - size + 0.1)"
-      text-anchor="middle"
-      alignment-baseline="middle"
-      :font-size="size"
-    >
-      {{ ('0' + i).slice(-2) }}
-    </text>
+  <g transform="translate(50 50)">
+    <g ref="group">
+      <circle
+        clip-path="circle()"
+        :r="radius"
+        :stroke-width="stroke * 2"
+        class="fill-transparent stroke-yellow-200"
+      />
+      <text
+        v-for="(digit, i) in digits"
+        class="fill-yellow-200"
+        :transform="textTransform(i, digits, radius - size + 0.1)"
+        text-anchor="middle"
+        alignment-baseline="middle"
+        :font-size="size"
+      >
+        {{ ('0' + i).slice(-2) }}
+      </text>
+    </g>
   </g>
 </template>
 
 <script>
+import anime from 'animejs/lib/anime.es.js';
+
 export default {
   name: 'Ring',
   props: {
@@ -42,17 +46,14 @@ export default {
       stroke: 0.25,
     };
   },
-  computed: {
-    groupTransform() {
-      if (!this.digits) return `translate(50 50)`;
-      const tick = 360 / this.digits;
-      return `translate(50 50) rotate(${-this.active * tick})`;
+  watch: {
+    active: {
+      handler(now, before) {
+        this.animate(now, before);
+      },
+      immediate: true,
     },
   },
-  mounted() {
-    // console.log('digits', this.digits);
-  },
-
   methods: {
     textTransform(i, total, r) {
       const tick = (2 * Math.PI) / total;
@@ -60,6 +61,16 @@ export default {
       const y = -Math.sin(i * tick) * r;
       const rotation = (i * 360) / total;
       return `translate(${x} ${y}) rotate(${rotation})`;
+    },
+    animate(now, before) {
+      const tick = 360 / this.digits;
+      now *= tick;
+      before *= tick;
+      anime({
+        targets: this?.$refs?.group,
+        rotate: [-before, -now],
+        easing: 'linear',
+      });
     },
   },
 };
