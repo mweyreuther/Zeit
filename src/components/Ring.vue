@@ -5,6 +5,7 @@
         clip-path="circle()"
         :r="radius"
         :stroke-width="stroke * 2"
+        stroke-dasharray="0.1"
         class="fill-transparent stroke-yellow-200"
       />
       <text
@@ -69,7 +70,7 @@ export default {
       anime({
         targets: this?.$refs?.group,
         rotate: [before, now === 360 ? 0 : now],
-        easing: 'linear',
+        easing: 'easeInOutSine',
         duration: 800,
       });
     },

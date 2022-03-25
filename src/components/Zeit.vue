@@ -2,9 +2,9 @@
   <svg
     xmlns="http://www.w3.org/2000/svg"
     version="1.1"
-    height="300%"
+    height="350%"
     viewBox="0 0 100 100"
-    style="transform: translate(3%, -37%)"
+    style="transform: translate(1%, -38%)"
     @mousemove="move"
   >
     <Ring :digits="24" :radius="radii[0]" :active="h" />
@@ -56,19 +56,6 @@ export default {
         }
       },
       immediate: true,
-    },
-  },
-
-  methods: {
-    down(e) {
-      console.log(e);
-    },
-    move(evt) {
-      const pos = evt.currentTarget.getBoundingClientRect();
-      console.log({
-        x: evt.clientX - pos.left,
-        y: evt.clientY - pos.top,
-      });
     },
   },
 };
