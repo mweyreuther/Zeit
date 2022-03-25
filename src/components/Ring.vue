@@ -23,9 +23,18 @@
 export default {
   name: 'Ring',
   props: {
-    digits: Number,
-    radius: Number,
-    active: Number,
+    digits: {
+      type: Number,
+      default: 0,
+    },
+    radius: {
+      type: Number,
+      default: 0,
+    },
+    active: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {
@@ -35,8 +44,9 @@ export default {
   },
   computed: {
     groupTransform() {
+      if (!this.digits) return `translate(50 50)`;
       const tick = 360 / this.digits;
-      return `translate(${50} ${50}) rotate(${-this.active * tick})`;
+      return `translate(50 50) rotate(${-this.active * tick})`;
     },
   },
   mounted() {

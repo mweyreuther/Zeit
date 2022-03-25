@@ -9,7 +9,7 @@
     <Ring :digits="24" :radius="radii[0]" :active="h" />
     <Ring :digits="60" :radius="radii[1]" :active="m" />
     <Ring :digits="60" :radius="radii[2]" :active="s" />
-    <!-- <Ring :digits="[]" :radius="radii[3]" :active="0" /> -->
+    <Ring :digits="0" :radius="radii[3]" :active="0" />
   </svg>
 </template>
 
@@ -40,7 +40,7 @@ export default {
       vm.h = d.getHours();
       vm.m = d.getMinutes();
       vm.s = d.getSeconds();
-      console.log(d);
+      // console.log(d);
     }, 1000);
   },
   methods: {},
