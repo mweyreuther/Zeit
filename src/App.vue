@@ -21,6 +21,7 @@
           clip-path="url(#circle)"
         />
         <text
+          font-family="Neuropol"
           :x="sin(i, hours.length)"
           :y="cos(i, hours.length)"
           fill="yellow"
@@ -66,3 +67,20 @@ export default {
   },
 };
 </script>
+
+<style>
+@font-face {
+  font-family: 'Neuropol';
+  src: local('Neuropol'), url('./fonts/Neuropol.ttf.woff') format('woff'),
+    url('./fonts/Neuropol.ttf.svg#Neuropol') format('svg'),
+    url('./fonts/Neuropol.ttf.eot'),
+    url('./fonts/Neuropol.ttf.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+/* @font-face {
+  font-family: "Merienda";
+  src: local("Merienda"),
+   url(./fonts/Merienda/Merienda-Regular.ttf) format("truetype");
+} */
+</style>
