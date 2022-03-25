@@ -66,7 +66,6 @@ export default {
       const tick = !this.digits ? 0 : 360 / this.digits;
       now = 360 - now * tick;
       before = before === undefined ? 0 : 360 - before * tick;
-      console.log('now', now, 'before', before);
       anime({
         targets: this?.$refs?.group,
         rotate: [before, now === 360 ? 0 : now],
