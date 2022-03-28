@@ -10,7 +10,6 @@
       />
       <text
         v-for="(digit, i) in digits"
-        class="fill-yellow-200"
         :transform="textTransform(i, digits, radius - size + 0.1)"
         text-anchor="middle"
         alignment-baseline="middle"

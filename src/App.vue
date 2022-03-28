@@ -2,12 +2,24 @@
   <div class="iphone bg-blue-300">
     <Zeit :on="isOn" />
     <div
-      class="absolute w-full bg-gradient-to-b from-blue-300/80 to-blue-300/10"
-      style="transform: translate(0%, 0%); top: 0; bottom: 500px"
+      class="
+        __gradient
+        top-0
+        bottom-2/3
+        bg-gradient-to-b
+        from-blue-300/80
+        to-blue-300/10
+      "
     />
     <div
-      class="absolute w-full bg-gradient-to-b from-blue-300/10 to-blue-300/80"
-      style="transform: translate(0%, 0%); top: 320px; bottom: 0"
+      class="
+        __gradient
+        top-1/3
+        bottom-0
+        bg-gradient-to-t
+        from-blue-300/80
+        to-blue-300/10
+      "
     />
     <Switch class="absolute bottom-8 left-8" @on="onOff" />
   </div>
@@ -36,16 +48,28 @@ export default {
 :root {
   --iPhoneColor: #64748b;
 }
+
+html {
+  height: -webkit-fill-available;
+}
+#app {
+  height: 100%;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+
+  display: grid;
+  place-items: center;
+}
 .iphone {
   /* https://codepen.io/adielhercules/pen/dJJGBQ */
-  overflow: clip;
+  font-family: 'Prompt';
+  overflow: hidden;
   position: relative;
-  margin: 0px auto;
   width: 360px;
   height: 780px;
   border-radius: 40px;
   box-shadow: 0px 0px 0px 20px var(--iPhoneColor);
-  font-family: 'Prompt';
+  margin: 20px;
 }
 
 .iphone::before,
@@ -71,5 +95,26 @@ export default {
   height: 4px;
   background-color: #f2f2f2;
   border-radius: 10px; */
+}
+.__gradient {
+  position: absolute;
+  width: 100%;
+}
+
+@media only screen and (max-width: 414px) {
+  .iphone {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .iphone::before,
+  .iphone::after {
+    content: none;
+  }
 }
 </style>

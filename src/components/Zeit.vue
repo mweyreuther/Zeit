@@ -2,9 +2,10 @@
   <svg
     xmlns="http://www.w3.org/2000/svg"
     version="1.1"
-    height="350%"
+    width="750%"
     viewBox="0 0 100 100"
-    style="transform: translate(1%, -38%)"
+    class="absolute top-1/3 fill-yellow-200 "
+    style="transform: translate(1%, -50%)"
     @mousemove="move"
   >
     <Ring :digits="24" :radius="radii[0]" :active="h" />
