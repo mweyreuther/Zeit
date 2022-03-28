@@ -34,7 +34,7 @@
         to-blue-300/10
       "
     />
-    <Switch class="absolute bottom-8 left-8" @on="onOff" />
+    <Switch class="absolute bottom-6 left-6" @on="onOff" />
   </div>
 </template>
 
