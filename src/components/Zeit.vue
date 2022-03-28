@@ -34,7 +34,7 @@
         to-blue-300/10
       "
     />
-    <Switch class="absolute bottom-6 left-6" @on="onOff" />
+    <Switch class="absolute bottom-6 left-6" @on="setOn" />
   </div>
 </template>
 
@@ -84,6 +84,9 @@ export default {
     },
   },
   methods: {
+    setOn(on) {
+      this.on = on;
+    },
     iOS() {
       // https://stackoverflow.com/questions/9038625/detect-if-device-is-ios
       return (
