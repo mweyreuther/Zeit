@@ -7,7 +7,7 @@
   >
     <rect x="0" width="100" height="100" rx="0" fill="#93c5fd" />
     <text
-      x="-60"
+      x="-50"
       y="80"
       fill="#fef08a"
       transform="rotate(-90)"
