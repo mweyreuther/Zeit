@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-4">
+  <div class="flex gap-4" v-if="false">
     <a href="#/">Zeit</a> | <a href="#/icon">Icon</a> |
     <a href="#/non-existent-path">Broken Link</a>
   </div>
@@ -40,11 +40,14 @@ export default {
 
 <style>
 :root {
-  --iPhoneColor: #64748b;
+  --iPhoneColor: #64748b; /* bg-slate-500 */
+  --bg-gray: #d1d5db; /* bg-gray-300 */
+  --bg-blue: #93c5fd; /* bg-blue-300 */
+  --bg-yellow: #fef08a; /* bg-yellow-200 */
 }
 body {
   font-family: 'Prompt';
-  background: #d1d5db; /* bg-gray-300 */
+  background: var(--bg-gray);
 }
 #app {
   height: 100%;
@@ -55,7 +58,7 @@ body {
 
 @media only screen and (max-width: 414px) {
   body {
-    background: #93c5fd; /* bg-blue-300 */
+    background: var(--bg-blue);
   }
 }
 </style>
