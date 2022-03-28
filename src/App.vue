@@ -1,5 +1,5 @@
 <template>
-  <div class="iphone bg-blue-300">
+  <div class="iphone">
     <Zeit :on="isOn" />
     <div
       class="
@@ -36,9 +36,28 @@ export default {
       isOn: true,
     };
   },
+  mounted() {
+    if (this.iOS)
+      document.getElementById('app').style.maxHeight = '-webkit-fill-available';
+  },
   methods: {
     onOff(isOn) {
       this.isOn = isOn;
+    },
+    iOS() {
+      // https://stackoverflow.com/questions/9038625/detect-if-device-is-ios
+      return (
+        [
+          'iPad Simulator',
+          'iPhone Simulator',
+          'iPod Simulator',
+          'iPad',
+          'iPhone',
+          'iPod',
+        ].includes(navigator.platform) ||
+        // iPad on iOS 13 detection
+        (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
+      );
     },
   },
 };
@@ -49,14 +68,13 @@ export default {
   --iPhoneColor: #64748b;
 }
 
-html {
-  height: -webkit-fill-available;
+body {
+  background: #d1d5db; /* bg-gray-300 */
 }
+
 #app {
   height: 100%;
   min-height: 100vh;
-  min-height: -webkit-fill-available;
-
   display: grid;
   place-items: center;
 }
@@ -70,6 +88,7 @@ html {
   border-radius: 40px;
   box-shadow: 0px 0px 0px 20px var(--iPhoneColor);
   margin: 20px;
+  background: #93c5fd; /* bg-blue-300 */
 }
 
 .iphone::before,
@@ -102,11 +121,10 @@ html {
 }
 
 @media only screen and (max-width: 414px) {
+  body {
+    background: #93c5fd; /* bg-blue-300 */
+  }
   .iphone {
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
     width: 100%;
     height: 100%;
     border-radius: 0;
