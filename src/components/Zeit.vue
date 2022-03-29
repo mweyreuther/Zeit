@@ -5,8 +5,8 @@
       version="1.1"
       width="750%"
       viewBox="0 0 100 100"
-      class="absolute top-1/3 fill-yellow-200"
-      style="transform: translate(1%, -50%)"
+      class="absolute fill-yellow-200"
+      :style="`transform: translate(1%, -50%); top: ${position}%`"
       @mousemove="move"
     >
       <Ring :digits="24" :radius="radii[0]" :active="h" />
@@ -15,24 +15,18 @@
       <Ring :digits="0" :radius="radii[3]" :active="0" />
     </svg>
     <div
-      class="
-        __gradient
-        top-0
-        bottom-2/3
-        bg-gradient-to-b
-        from-blue-300/80
-        to-blue-300/10
-      "
+      class="__gradient top-0 bg-gradient-to-b from-blue-300/80 to-blue-300/10"
+      :style="`bottom: ${100-position}%`"
     />
     <div
       class="
         __gradient
-        top-1/3
         bottom-0
         bg-gradient-to-t
         from-blue-300/80
         to-blue-300/10
       "
+      :style="`top: ${position}%`"
     />
     <Switch class="absolute bottom-6 left-6" @on="setOn" />
   </div>
@@ -47,10 +41,20 @@ export default {
   components: { Ring, Switch },
 
   data() {
-    return { on: true, h: 0, m: 0, s: 0, intervalID: null };
+    return {
+      on: true,
+      h: 0,
+      m: 0,
+      s: 0,
+      goldenRatio: (1 + Math.sqrt(5)) / 2,
+      intervalID: null,
+    };
   },
 
   computed: {
+    position() {
+      return (1 - 1 / this.goldenRatio) * 100;
+    },
     radii() {
       const delta = 3.5;
       const inner = 35;
